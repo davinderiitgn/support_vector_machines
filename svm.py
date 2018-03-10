@@ -48,7 +48,7 @@ def coordinate_ascent_2d(alpha,x_s,y_s,count): # Try to improve this after confi
 	b = random.randint(0,len(alpha)-1)
 	while a == b:
 		b = random.randint(0,len(alpha)-1)
-	c = float(1) # HYPER-PARAMETER
+	c = float(10) # HYPER-PARAMETER [To penalise the abberations, i.e. the c in c*(sum[alphi^(i)])]
 
 	k = float(0)
 	for i in range(len(alpha)):
@@ -106,7 +106,6 @@ def make_prediction(x):
 				mx = temp
 
 	b = -(mn+mx)/2
-	print("b: ",b)
 	if w_t_x + b > 0:
 		return 1
 	return -1
@@ -119,7 +118,7 @@ data_test_labels = get_labels(data_test)
 x_s = data_train
 
 alpha = [0]*(len(x_s)-1)
-alpha = coordinate_ascent_2d(alpha,x_s,y_s,100)
+alpha = coordinate_ascent_2d(alpha,x_s,y_s,500)
 
 correct = 0
 for i in range(len(data_test)):
